@@ -58,7 +58,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'Admin') {
     
     <div class="menu">
         <a href="dashboard.php">Tableau de bord</a>
-        <a href="users.php">Gestion des utilisateurs</a>
+        <a href="manageUsers.php">Gestion des utilisateurs</a>
         <a href="products.php">Gestion des produits</a>
         <a href="logout.php">Déconnexion</a>
     </div>
