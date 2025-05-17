@@ -27,10 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: ../Admin/admin.php");
                 break;
             case 'Vendeur':
-                header("Location: ../landingPage/seller.php");
+                header("Location: ../Seller/seller.php");
                 break;
             case 'Client':
-                header("Location: ../landingPage/client.php");
+                header("Location: ../Client/client.php");
                 break;
             default:
                 header("Location: ../index.php");

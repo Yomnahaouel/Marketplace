@@ -25,7 +25,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'Client') {
         <a href="dashboard.php">Mon compte</a>
         <a href="orders.php">Mes commandes</a>
         <a href="wishlist.php">Ma liste de souhaits</a>
-        <a href="logout.php">Déconnexion</a>
+        <a href="../compte/login.php">Déconnexion</a>
     </div>
     
     <div class="content">
