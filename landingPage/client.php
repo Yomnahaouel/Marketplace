@@ -10,45 +10,9 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'Client') {
 <head>
     <meta charset="UTF-8">
     <title>Mon Compte</title>
+    <link rel="stylesheet" href="client.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .header {
-            background-color: #388e3c;
-            color: white;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-        }
-        .menu {
-            background-color: #333;
-            overflow: hidden;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .menu a {
-            float: left;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        .menu a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        .order {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+
     </style>
 </head>
 <body>
