@@ -66,7 +66,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'Vendeur') {
         <a href="dashboard.php">Tableau de bord</a>
         <a href="products.php">Mes produits</a>
         <a href="orders.php">Commandes</a>
-        <a href="logout.php">Déconnexion</a>
+        <a href="../compte/login.php">Déconnexion</a>
     </div>
     
     <div class="content">

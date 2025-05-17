@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user'] = $user;
         switch ($user['type']) {
             case 'Admin':
-                header("Location: ../landingPage/admin.php");
+                header("Location: ../Admin/admin.php");
                 break;
             case 'Vendeur':
                 header("Location: ../landingPage/seller.php");

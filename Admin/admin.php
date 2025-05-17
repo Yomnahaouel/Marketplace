@@ -27,8 +27,8 @@ $totalRevenue = $conn->query("SELECT SUM(montant_total) AS total FROM commande W
     </div>
     <div class="menu">
         <a href="./admin.php">Tableau de bord</a>
-        <a href="../functionalities/manageUsers.php">Gestion des utilisateurs</a>
-        <a href="../functionalities/products.php">Gestion des produits</a>
+        <a href="./manageUsers.php">Gestion des utilisateurs</a>
+        <a href="./products.php">Gestion des produits</a>
         <a href="../compte/logout.php">Déconnexion</a>
     </div>
     <div class="content centered">

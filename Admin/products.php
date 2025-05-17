@@ -75,9 +75,9 @@ $result = $conn->query($query);
         <p>Connecté en tant que: <?= htmlspecialchars($_SESSION['user']['nom']) ?> (Admin)</p>
     </div>
     <div class="menu">
-        <a href="../landingPage/admin.php">Tableau de bord</a>
-        <a href="../functionalities/manageUsers.php">Gestion des utilisateurs</a>
-        <a href="../functionalities/products.php" class="active">Gestion des produits</a>
+        <a href="./admin.php">Tableau de bord</a>
+        <a href="./manageUsers.php">Gestion des utilisateurs</a>
+        <a href="./products.php" class="active">Gestion des produits</a>
         <a href="../compte/logout.php">Déconnexion</a>
     </div>
     <div class="container mt-4">
