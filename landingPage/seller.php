@@ -10,6 +10,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'Vendeur') {
 <head>
     <meta charset="UTF-8">
     <title>Espace Vendeur</title>
+    <link rel="stylesheet" href="seller.css">
     <style>
         body {
             font-family: Arial, sans-serif;
