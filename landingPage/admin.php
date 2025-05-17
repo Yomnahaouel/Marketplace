@@ -54,7 +54,7 @@ $totalRevenue = $conn->query("SELECT SUM(montant_total) AS total FROM commande W
             </div>
             <div class="stat-box" style="background: #ffebee;">
                 <h3>Revenu Total</h3>
-                <p class="stat-value"><?= number_format($totalRevenue, 2) ?> €</p>
+                <p class="stat-value"><?= number_format($totalRevenue, 2) ?> TND</p>
             </div>
         </div>
     </div>
