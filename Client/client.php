@@ -23,9 +23,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'Client') {
     
     <div class="menu">
         <a href="./client.php">Mon compte</a>
-        <a href="orders.php">Mes commandes</a>
+        <a href="products.php">Produits</a>
         <a href="wishlist.php">Ma liste de souhaits</a>
-        <a href="../compte/login.php">Déconnexion</a>
+        <a href="cart.php">Mon panier</a>
+        <a href="order.php">Mes commandes</a>
+        <a href="../compte/logout.php">Déconnexion</a>
     </div>
     
     <div class="content">
@@ -40,10 +42,22 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'Client') {
         <h2 style="margin-top: 30px;">Dernières commandes</h2>
         
         <div class="order">
-            <p><strong>Commande #12345</strong> - 10/06/2023</p>
-            <p>Statut: Livré</p>
+            <?php
+            require_once '../db.php';
+            $user_id = $_SESSION['user']['id'];
+            $query = "SELECT id, date_commande AS date, statut AS status FROM commande WHERE id_client = $user_id ORDER BY date_commande DESC LIMIT 5";
+            $result = $conn->query($query);
+
+            if ($result->num_rows > 0) {
+                while ($order = $result->fetch_assoc()) {
+                    echo "<p><strong>Commande #" . $order['id'] . "</strong> - " . $order['date'] . "</p>";
+                    echo "<p>Statut: " . $order['status'] . "</p>";
+                }
+            } else {
+                echo "<p>Aucune commande récente.</p>";
+            }
+            ?>
         </div>
     </div>
 </body>
-</html>
 </html>
