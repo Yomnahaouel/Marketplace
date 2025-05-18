@@ -23,12 +23,12 @@ $totalRevenue = $conn->query("SELECT SUM(montant_total) AS total FROM commande W
 <body>
     <div class="header">
         <h1>Espace Administrateur</h1>
-        <p>Connecté en tant que: <?= htmlspecialchars($_SESSION['user']['nom']) ?> (Admin)</p>
     </div>
     <div class="menu">
-        <a href="./admin.php">Tableau de bord</a>
-        <a href="./manageUsers.php">Gestion des utilisateurs</a>
-        <a href="./products.php">Gestion des produits</a>
+        <a href="./admin.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin.php' ? 'active' : '' ?>">Tableau de bord</a>
+        <a href="./manageUsers.php" class="<?= basename($_SERVER['PHP_SELF']) === 'manageUsers.php' ? 'active' : '' ?>">Gestion des utilisateurs</a>
+        <a href="./products.php" class="<?= basename($_SERVER['PHP_SELF']) === 'products.php' ? 'active' : '' ?>">Gestion des produits</a>
+        <a href="./publicite.php" class="<?= basename($_SERVER['PHP_SELF']) === 'publicite.php' ? 'active' : '' ?>">Gestion des publicités</a>
         <a href="../compte/logout.php">Déconnexion</a>
     </div>
     <div class="content centered">

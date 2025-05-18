@@ -2,7 +2,7 @@
 // 1. Sécurité et connexion DB
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user']['type'] !== 'Admin') {
-    header("Location: ../landingPage/login.php");
+    header("Location: ../compte/login.php");
     exit();
 }
 require_once '../db.php';
@@ -54,18 +54,18 @@ $result = $conn->query($query);
     <meta charset="UTF-8">
     <title>Gestion Utilisateurs</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="manageUsers.css">
+    <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
     <div class="header">
         <h1>Espace Administrateur</h1>
-        <p>Connecté en tant que: <?= htmlspecialchars($_SESSION['user']['nom']) ?> (Admin)</p>
     </div>
     <div class="menu">
-        <a href="./admin.php">Tableau de bord</a>
-        <a href="./manageUsers.php" class="active">Gestion des utilisateurs</a>
-        <a href="./products.php">Gestion des produits</a>
+        <a href="./admin.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin.php' ? 'active' : '' ?>">Tableau de bord</a>
+        <a href="./manageUsers.php" class="<?= basename($_SERVER['PHP_SELF']) === 'manageUsers.php' ? 'active' : '' ?>">Gestion des utilisateurs</a>
+        <a href="./products.php" class="<?= basename($_SERVER['PHP_SELF']) === 'products.php' ? 'active' : '' ?>">Gestion des produits</a>
+        <a href="./publicite.php" class="<?= basename($_SERVER['PHP_SELF']) === 'publicite.php' ? 'active' : '' ?>">Gestion des publicités</a>
         <a href="../compte/logout.php">Déconnexion</a>
     </div>
     <div class="container mt-4">
