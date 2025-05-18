@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `prix` decimal(10,2) NOT NULL,
   `quantite_stock` int NOT NULL,
   `id_vendeur` int NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_vendeur` (`id_vendeur`),
   CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`id_vendeur`) REFERENCES `utilisateur` (`id`)
