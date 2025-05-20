@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     $query = "SELECT p.*, c.quantite AS quantity FROM produit p JOIN panier c ON p.id = c.id_produit WHERE c.id_client = $user_id";
     $result = $conn->query($query);
 
+    // Add error handling for placing an order with an empty cart
     if ($result->num_rows === 0) {
         $_SESSION['error'] = 'Votre panier est vide. Ajoutez des articles avant de passer une commande.';
         header("Location: cart.php");
@@ -27,46 +28,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         $order_items[] = $item;
     }
 
-    // Validate delivery address
-    if (empty($_POST['address'])) {
-        $_SESSION['error'] = 'Veuillez entrer une adresse de livraison.';
-        header("Location: order.php");
-        exit();
-    }
-    $address = $conn->real_escape_string($_POST['address']);
+    // Insert order
+    $stmt = $conn->prepare("INSERT INTO commande (id_client, montant_total, statut) VALUES (?, ?, 'En attente')");
+    $stmt->bind_param("id", $user_id, $total);
+    $stmt->execute();
+    $order_id = $stmt->insert_id;
 
-    // Start transaction
-    $conn->begin_transaction();
-    try {
-        // Insert order
-        $stmt = $conn->prepare("INSERT INTO commande (id_client, montant_total, statut, adresse_livraison) 
-                               VALUES (?, ?, 'En attente', ?)");
-        $stmt->bind_param("ids", $user_id, $total, $address);
+    // Insert order items
+    $stmt = $conn->prepare("INSERT INTO commande_items (commande_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
+    foreach ($order_items as $item) {
+        $stmt->bind_param("iiid", $order_id, $item['id'], $item['quantity'], $item['prix']);
         $stmt->execute();
-        $order_id = $stmt->insert_id;
-
-        // Insert order items
-        $stmt = $conn->prepare("INSERT INTO commande_items (commande_id, product_id, quantity, price) 
-                               VALUES (?, ?, ?, ?)");
-        foreach ($order_items as $item) {
-            $stmt->bind_param("iiid", $order_id, $item['id'], $item['quantity'], $item['prix']);
-            $stmt->execute();
-        }
-
-        // Clear cart
-        $stmt = $conn->prepare("DELETE FROM panier WHERE id_client = ?");
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-
-        $conn->commit();
-        header("Location: order.php?success=1");
-        exit();
-    } catch (Exception $e) {
-        $conn->rollback();
-        $_SESSION['error'] = "Erreur lors de la commande: " . $e->getMessage();
-        header("Location: order.php");
-        exit();
     }
+
+    // Clear cart
+    $stmt = $conn->prepare("DELETE FROM panier WHERE id_client = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+
+    header("Location: order.php?success=1");
+    exit();
 }
 
 // Fetch cart items for review
@@ -123,13 +104,8 @@ $result = $conn->query($query);
                 <?php $total += $item['prix'] * $item['quantity']; endwhile; ?>
             </tbody>
         </table>
-        <h4>Total: <?= number_format($total, 2) ?> €</h4>
+        <h4>Total: <?= number_format($total, 2) ?> TND</h4>
         <form method="POST">
-            <div class="mb-3">
-                <label for="address" class="form-label">Adresse de livraison</label>
-                <textarea class="form-control" id="address" name="address" 
-                    placeholder="Entrez votre adresse complète" required></textarea>
-            </div>
             <button type="submit" name="place_order" class="btn btn-success">Confirmer la commande</button>
         </form>
         <?php endif; ?>
