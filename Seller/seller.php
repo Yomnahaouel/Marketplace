@@ -179,21 +179,12 @@ $totalRevenue = $conn->query("SELECT SUM(c.montant_total) AS total FROM commande
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Espace Vendeur</h1>
-        <p>Connecté en tant que: <?= htmlspecialchars($_SESSION['user']['nom']) ?> (Vendeur)</p>
-    </div>
-    <div class="menu">
-        <a href="./seller.php">Tableau de bord</a>
-        <a href="./products.php">Mes produits</a>
-        <a href="./orders.php">Mes commandes</a>
-        <a href="ads.php" style="color:#fff;text-decoration:none;font-size:1.1rem;padding:18px 22px;display:inline-block;font-weight:600;transition:background 0.2s;border-radius:8px 8px 0 0;" onmouseover="this.style.background='#1251a3'" onmouseout="this.style.background='none'">Mes publicités</a>
-        <a href="../compte/logout.php">Déconnexion</a>
-    </div>
-    <div class="content centered">
+    <?php include 'header.php'; ?>
+
+    <div class="content">
         <h2>Statistiques</h2>
         <p>Bienvenue dans votre espace vendeur. Voici un aperçu de vos statistiques :</p>
-        
+
         <div class="stats-container">
             <div class="stat-box" style="background: #e3f2fd;">
                 <h3>Produits</h3>
