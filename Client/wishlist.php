@@ -68,16 +68,19 @@ $result = $conn->query($query);
         <div class="row">
             <?php while ($product = $result->fetch_assoc()): ?>
             <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="<?= $product['image'] ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name']) ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($product['name']) ?></h5>
-                        <p class="card-text">Prix: <?= number_format($product['price'], 2) ?> €</p>
-                        <p class="card-text">Catégorie: <?= htmlspecialchars($product['category']) ?></p>
-                        <a href="cart.php?add=<?= $product['product_id'] ?>" class="btn btn-sm btn-primary">Ajouter au panier</a>
-                        <a href="wishlist.php?remove=<?= $product['product_id'] ?>" class="btn btn-sm btn-danger">Retirer</a>
-                    </div>
-                </div>
+              <?php $basePath = 'http://localhost/Marketplace/'; ?>
+
+<div class="card">
+    <img src="<?= $basePath . htmlspecialchars($product['image'] ?? 'default.jpg') ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name']) ?>">
+    <div class="card-body">
+        <h5 class="card-title"><?= htmlspecialchars($product['name']) ?></h5>
+        <p class="card-text">Prix: <?= number_format($product['price'], 2) ?> €</p>
+        <p class="card-text">Catégorie: <?= htmlspecialchars($product['category']) ?></p>
+        <a href="cart.php?add=<?= $product['product_id'] ?>" class="btn btn-sm btn-primary">Ajouter au panier</a>
+        <a href="wishlist.php?remove=<?= $product['product_id'] ?>" class="btn btn-sm btn-danger">Retirer</a>
+    </div>
+</div>
+
             </div>
             <?php endwhile; ?>
         </div>

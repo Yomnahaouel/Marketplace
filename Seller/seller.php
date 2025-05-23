@@ -194,10 +194,7 @@ $totalRevenue = $conn->query("SELECT SUM(c.montant_total) AS total FROM commande
                 <h3>Commandes</h3>
                 <p class="stat-value"><?= $totalOrders ?></p>
             </div>
-            <div class="stat-box" style="background: #ffebee;">
-                <h3>Revenu Total</h3>
-                <p class="stat-value"><?= number_format($totalRevenue, 2) ?> TND</p>
-            </div>
+           
         </div>
     </div>
 </body>

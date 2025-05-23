@@ -32,10 +32,7 @@ if (!empty($_GET['produit'])) {
     $produit = $conn->real_escape_string($_GET['produit']);
     $whereClauses[] = "pr.nom LIKE '%$produit%'";
 }
-if (!empty($_GET['statut'])) {
-    $statut = $conn->real_escape_string($_GET['statut']);
-    $whereClauses[] = "p.statut = '$statut'";
-}
+
 if (!empty($_GET['date_debut'])) {
     $date_debut = $conn->real_escape_string($_GET['date_debut']);
     $whereClauses[] = "p.date_debut >= '$date_debut'";
@@ -79,14 +76,7 @@ $result = $conn->query($query);
             <div class="col-md-3">
                 <input type="text" name="produit" class="form-control" placeholder="Nom du produit" value="<?= htmlspecialchars($_GET['produit'] ?? '') ?>">
             </div>
-            <div class="col-md-3">
-                <select name="statut" class="form-select">
-                    <option value="">Tous les statuts</option>
-                    <option value="En attente" <?= (isset($_GET['statut']) && $_GET['statut'] === 'En attente') ? 'selected' : '' ?>>En attente</option>
-                    <option value="Active" <?= (isset($_GET['statut']) && $_GET['statut'] === 'Active') ? 'selected' : '' ?>>Active</option>
-                    <option value="Terminée" <?= (isset($_GET['statut']) && $_GET['statut'] === 'Terminée') ? 'selected' : '' ?>>Terminée</option>
-                </select>
-            </div>
+            
             <div class="col-md-3">
                 <input type="date" name="date_debut" class="form-control" placeholder="Date début" value="<?= htmlspecialchars($_GET['date_debut'] ?? '') ?>">
             </div>
@@ -107,7 +97,6 @@ $result = $conn->query($query);
                     <th scope="col">Produit</th>
                     <th scope="col">Date Début</th>
                     <th scope="col">Date Fin</th>
-                    <th scope="col">Statut</th>
                     <th scope="col">Budget</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -119,17 +108,8 @@ $result = $conn->query($query);
                     <td><?= htmlspecialchars($publicite['produit_nom']) ?></td>
                     <td><?= $publicite['date_debut'] ?></td>
                     <td><?= $publicite['date_fin'] ?></td>
-                    <td><?= $publicite['statut'] ?></td>
                     <td><?= number_format($publicite['budget'], 2) ?> €</td>
                     <td>
-                        <form method="POST" class="d-inline">
-                            <input type="hidden" name="id" value="<?= $publicite['id'] ?>">
-                            <select name="statut" class="form-select form-select-sm d-inline w-auto" onchange="this.form.submit()">
-                                <option value="En attente" <?= $publicite['statut'] === 'En attente' ? 'selected' : '' ?>>En attente</option>
-                                <option value="Active" <?= $publicite['statut'] === 'Active' ? 'selected' : '' ?>>Active</option>
-                                <option value="Terminée" <?= $publicite['statut'] === 'Terminée' ? 'selected' : '' ?>>Terminée</option>
-                            </select>
-                        </form>
                         <a href="?supprimer=<?= $publicite['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
                     </td>
                 </tr>

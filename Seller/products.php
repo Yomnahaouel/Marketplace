@@ -160,8 +160,8 @@ if (isset($_POST['modifier_produit'])) {
                 echo '<td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' . htmlspecialchars($prod['description']) . '</td>';
                 echo '<td>';
                 // Update the image path to include the base URL
-                if (!empty($prod['photo'])) {
-                    $imageUrl = 'http://localhost/Marketplace/' . htmlspecialchars($prod['photo']);
+                if (!empty($prod['image'])) {
+                    $imageUrl = 'http://localhost/Marketplace/' . htmlspecialchars($prod['image']);
                     echo '<img src="' . $imageUrl . '" alt="Photo du produit" style="max-width:80px;max-height:80px;border-radius:8px;">';
                 } else {
                     echo '<span style="color:#888;">Pas de photo</span>'; // Message par défaut si aucune photo n'est disponible
